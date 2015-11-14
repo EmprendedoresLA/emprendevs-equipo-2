@@ -1,19 +1,19 @@
 package com.emprendevs.easyparking.model;
 
 
-import java.util.Calendar;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document
+public class Parking extends AbstractDocument {
 
-public class Parking {
-
-    @Id
-    private String id;
-
-    private String userID;
+    @DBRef
+    private User user;
+    @DBRef
     private Address address;
     private Calendar beginDate;
     private Calendar endDate;
@@ -24,10 +24,9 @@ public class Parking {
     @Transient
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-	public Parking(String id, String userID, Address address, Calendar beginDate, Calendar endDate,
-			Calendar cancelledDate, String state) {
-		this.id = id;
-		this.userID = userID;
+	public Parking(User user, Address address, Calendar beginDate, Calendar endDate, Calendar cancelledDate, String state) {
+		super();
+		this.user = user;
 		this.address = address;
 		this.beginDate = beginDate;
 		this.endDate = endDate;
@@ -37,7 +36,7 @@ public class Parking {
 
 	@Override
 	public String toString() {
-		return "Parking [id=" + id + ", userID=" + userID + ", streetName=" + address.getStreetName() + ", streetNumber="
+		return "Parking [id=" + this.getId() + ", userID=" + user.getId() + ", streetName=" + address.getStreetName() + ", streetNumber="
 				+ address.getStreetNumber() 
 				+ ", beginDate=" + dateFormat.format(beginDate.getTime()) 
 				+ ", endDate=" + dateFormat.format(endDate.getTime()) 
@@ -46,26 +45,13 @@ public class Parking {
 				+ "]";
 	}
 
-
-	public String getId() {
-		return id;
+	public User getUser() {
+		return user;
 	}
 
-
-	public void setId(String id) {
-		this.id = id;
+	public void setUser(User user) {
+		this.user = user;
 	}
-
-
-	public String getUserID() {
-		return userID;
-	}
-
-
-	public void setUserID(String userID) {
-		this.userID = userID;
-	}
-
 
 	public Calendar getBeginDate() {
 		return beginDate;

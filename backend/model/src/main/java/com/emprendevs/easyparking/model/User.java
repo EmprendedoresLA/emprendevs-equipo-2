@@ -1,6 +1,6 @@
 package com.emprendevs.easyparking.model;
 
-public class User {
+public class User extends AbstractDocument {
 	
 	String name;
 	String phone;

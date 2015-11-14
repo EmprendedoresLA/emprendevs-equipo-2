@@ -14,8 +14,7 @@ public class Parking {
     private String id;
 
     private String userID;
-    private String streetName;
-    private int streetNumber;
+    private Address address;
     private Calendar beginDate;
     private Calendar endDate;
     private Calendar cancelledDate;
@@ -25,29 +24,21 @@ public class Parking {
     @Transient
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    public Parking() {}
-
-
-	public Parking(String id, String userID, String streetName, int streetNumber, Calendar beginDate, Calendar endDate,
+	public Parking(String id, String userID, Address address, Calendar beginDate, Calendar endDate,
 			Calendar cancelledDate, String state) {
-		//super();
 		this.id = id;
 		this.userID = userID;
-		this.streetName = streetName;
-		this.streetNumber = streetNumber;
+		this.address = address;
 		this.beginDate = beginDate;
 		this.endDate = endDate;
 		this.cancelledDate = cancelledDate;
 		this.state = state;
 	}
 
-
-
-
 	@Override
 	public String toString() {
-		return "Parking [id=" + id + ", userID=" + userID + ", streetName=" + streetName + ", streetNumber="
-				+ streetNumber 
+		return "Parking [id=" + id + ", userID=" + userID + ", streetName=" + address.getStreetName() + ", streetNumber="
+				+ address.getStreetNumber() 
 				+ ", beginDate=" + dateFormat.format(beginDate.getTime()) 
 				+ ", endDate=" + dateFormat.format(endDate.getTime()) 
 				+ ", cancelledDate=" + dateFormat.format(cancelledDate.getTime()) 
@@ -73,26 +64,6 @@ public class Parking {
 
 	public void setUserID(String userID) {
 		this.userID = userID;
-	}
-
-
-	public String getStreetName() {
-		return streetName;
-	}
-
-
-	public void setStreetName(String streetName) {
-		this.streetName = streetName;
-	}
-
-
-	public int getStreetNumber() {
-		return streetNumber;
-	}
-
-
-	public void setStreetNumber(int streetNumber) {
-		this.streetNumber = streetNumber;
 	}
 
 
@@ -134,8 +105,14 @@ public class Parking {
 	}
 
 
+	public Address getAddress() {
+		return address;
+	}
 
 
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 
 }
 

@@ -1,6 +1,6 @@
 package com.emprendevs.easyparking.model;
 
-public class Address {
+public class Address extends AbstractDocument {
 	
 	private String streetName;
 	private int streetNumber;

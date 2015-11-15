@@ -63,7 +63,8 @@
             url: "/user/login",
             type: "POST",
             dataType: "json",
-            success:function(){
+            success:function()
+            {
               $('#deshabilitar').fadeOut('fast', function()
               {
                 $.ajax({
@@ -89,8 +90,18 @@
                       })
                     }
                   }
-                })
+                });
               });
+            },
+            error:function(xhr, options, thrownerr)
+            {
+              if (xhr.status == 403)
+              {
+                // Datos incorrectos
+                $('#deshabilitar').fadeOut('fast', function(){
+                  $('#errlogin').fadeIn('fast');
+                })
+              }
             }
           });
         });

@@ -12,7 +12,7 @@ Otra característica que ofrece EasyParking es la detección automática del lug
 estaciona el vehículo.
 
 
-Requerimientos funcionales:
+# Requerimientos funcionales:
 
 1. Para poder utilizar EasyParking el usuario debe tener creada una cuenta en 
 www.moviltr.com.ar. El acceso a la aplicación se realizara utilizando el usuario y 
@@ -30,6 +30,9 @@ tiempo indefinido.
 www.moviltr.com.ar. Los pagos se realizan o hasta que caduque el tiempo seleccionado 
 por el usuario o bien hasta que el usuario cancela el estacionamiento.
 
-Arquitectura
+# Arquitectura
 
-<img src="https://docs.google.com/drawings/d/1j7fGHD1lHZElJiDE9oc1uM89t1FcVCaY2YI7Pl-m-JA/pub?w=960&amp;h=720">
+En el siguiente diagrama se puede apreciar la arquitectura de EasyParking.
+
+https://docs.google.com/drawings/d/1j7fGHD1lHZElJiDE9oc1uM89t1FcVCaY2YI7Pl-m-JA/pub?w=960&h=720
+

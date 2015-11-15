@@ -34,7 +34,7 @@ public class EasyParkingModelTestApp implements CommandLineRunner
 		parkingRepository.deleteAll();
 			
 
-		User user = new User("Federico", "123456", "EYG722", "abc123");
+		User user = new User("jose", "123456", "HJK722", "abc123");
     	Address address = new Address("Montevideo", 1500);    	
         Parking parking = new Parking(
         		user,
@@ -57,6 +57,18 @@ public class EasyParkingModelTestApp implements CommandLineRunner
 			System.out.println(_parking);
 		}
 				
+		System.out.println();
+		System.out.println("-------------------------------");
+		System.out.println();
+		
+		User newUser = new User("Marty", "123456", "EYG722", "def456");
+		userRepository.save(newUser);
+		
+		User federico = userRepository.findByUsernameAndPassword("jose", "abc123");
+		
+		System.out.println("User federico:");
+		System.out.println(federico);
+		
 		System.out.println();
 		System.out.println("-------------------------------");
 		System.out.println();

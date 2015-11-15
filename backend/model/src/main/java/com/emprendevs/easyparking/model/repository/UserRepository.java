@@ -6,4 +6,6 @@ import com.emprendevs.easyparking.model.User;
 
 public interface UserRepository extends MongoRepository<User, String> {
 
+	User findByUsernameAndPassword(String username, String password);
+	
 }

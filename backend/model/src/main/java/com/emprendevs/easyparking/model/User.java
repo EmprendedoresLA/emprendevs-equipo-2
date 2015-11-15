@@ -2,24 +2,24 @@ package com.emprendevs.easyparking.model;
 
 public class User extends AbstractDocument {
 	
-	String name;
+	String username;
 	String phone;
 	String licence;
 	String password;
 	
-	public User(String name, String phone, String licence, String password) {
+	public User(String username, String phone, String licence, String password) {
 		super();
-		this.name = name;
+		this.username = username;
 		this.phone = phone;
 		this.licence = licence;
 		this.password = password;
 	}
 	
-	public String getName() {
-		return name;
+	public String getUsername() {
+		return username;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setUsername(String name) {
+		this.username = name;
 	}
 	public String getPhone() {
 		return phone;
@@ -38,6 +38,12 @@ public class User extends AbstractDocument {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", phone=" + phone + ", licence="
+				+ licence + ", password=" + password + "]";
 	}
 	
 }

@@ -11,7 +11,7 @@
     <div id="deshabilitar" style="display:none">
       <div><img src="loading.gif"> Cargando...</div>
     </div>
-    <div class="form login index">
+    <div class="form login index" id="login">
       <div class="mensaje error" id="errlogin" style="display:none">Tel&eacute;fono o clave incorrectos</div>
       <p>
         <label for="username">Tel&eacute;fono</label>
@@ -29,6 +29,32 @@
         </ul>
       </p>
     </div>
+    <div class="index parking" id="main">
+      <div id="nuevo" class="form" style="display:none">
+        <p>
+          <label for="direccion">Direcci&oacute;n</label>
+          <input type="text" name="calle" placeholder="Calle">
+          <input type="text" name="numero" placeholder="0000" style="margin-top:5px">
+        </p>
+        <p class="completar">
+          <input type="button" id="btpagar" value="Pagar">
+        </p>
+      </div>
+      <div id="actual" class="form" style="display:none">
+        <p>
+          <label for="direccion">Direcci&oacute;n actual</label>
+          <input type="text" id="direccion" name="direccion" value="">
+        </p>
+        <p>
+          <label for="fdesde">Desde</label>
+          <input type="text" id="fdesde" name="fdesde" value="">
+        </p>
+        <p>
+          <label for="fhasta">Hasta</label>
+          <input type="text" id="fhasta" name="fhasta" value="">
+        </p>
+      </div>
+    </div>
     <script>
     (function(){
       $('#btlogin').click(function(){
@@ -37,20 +63,36 @@
             url: "/user/login",
             type: "POST",
             dataType: "json",
-            success:function(respuesta){
-              if (respuesta.success)
+            success:function(){
+              $('#deshabilitar').fadeOut('fast', function()
               {
-                // ...
-              }
-              else
-              {
-                $('#deshabilitar').fadeOut('fast', function()
-                {
-                  $('#errlogin').fadeIn('fast').delay(5000).fadeOut('fast');
-                });
-              }
+                $.ajax({
+                  url: "/parking",
+                  type: "GET",
+                  dataType: "json",
+                  success:function(respuesta)
+                  {
+                    if (typeof respuesta.current_parking != 'undefined')
+                    {
+                      // Mostrar informacion del estacionamiento actual
+                      $('#direccion').val(respuesta.current_parking.streetName + ' ' + respuesta.current_parking.streetNumber);
+
+                      $('#deshabilitar, #login').fadeOut('fast', function(){
+                        $('#main, #actual').fadeIn('fast');
+                      })
+                    }
+                    else
+                    {
+                      // No hay parking actual
+                      $('#deshabilitar, #login').fadeOut('fast', function(){
+                        $('#main, #nuevo').fadeIn('fast');
+                      })
+                    }
+                  }
+                })
+              });
             }
-          })
+          });
         });
       });
     })();

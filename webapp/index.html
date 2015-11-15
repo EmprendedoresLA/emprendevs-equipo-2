@@ -1,23 +1,59 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+    <script src="jquery-1.11.3.min.js"></script>
     <link rel="stylesheet" media="all" href="global.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>Movil TR</title>
   </head>
   <body>
-    <div class="login index">
+    <div id="deshabilitar" style="display:none">
+      <div><img src="loading.gif"> Cargando...</div>
+    </div>
+    <div class="form login index">
+      <div class="mensaje error" id="errlogin" style="display:none">Tel&eacute;fono o clave incorrectos</div>
       <p>
-        <label for="username">Usuario</label>
+        <label for="username">Tel&eacute;fono</label>
         <input type="text" name="username" id="username" placeholder="341606060">
       </p>
       <p>
         <label for="password">Clave</label>
         <input type="password" name="password" id="password" placeholder="****">
       </p>
-      <p>
-        <input type="button" class="login submit" value="Acceder">
+      <p class="completar">
+        <input type="button" id="btlogin" class="login submit" value="Acceder">
+        <ul class="enlaces">
+          <li><a href="http://moviltr.com.ar/" target="_blank">Obtener una clave</a></li>
+          <li><a href="#">Obtener informaci&oacute;n</a></li>
+        </ul>
       </p>
     </div>
+    <script>
+    (function(){
+      $('#btlogin').click(function(){
+        $('#deshabilitar').fadeIn(500, function(){
+          $.ajax({
+            url: "/user/login",
+            type: "POST",
+            dataType: "json",
+            success:function(respuesta){
+              if (respuesta.success)
+              {
+                // ...
+              }
+              else
+              {
+                $('#deshabilitar').fadeOut('fast', function()
+                {
+                  $('#errlogin').fadeIn('fast').delay(5000).fadeOut('fast');
+                });
+              }
+            }
+          })
+        });
+      });
+    })();
+    </script>
   </body>
 </html>

@@ -1,15 +1,15 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <script src="jquery-1.11.3.min.js"></script>
-    <link rel="stylesheet" media="all" href="global.css">
-    <meta charset="utf-8">
+    <script src="https://localhost:8080/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" media="all" href="https://localhost:8080/global.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="utf-8">
     <title>Easyparking</title>
   </head>
   <body>
     <div id="deshabilitar" style="display:none">
-      <div><img src="loading.gif"> Cargando...</div>
+      <div><img src="https://localhost:8080/loading.gif" alt="" title="Cargando..."> Cargando...</div>
     </div>
     <div class="form login index" id="login">
       <div class="mensaje error" id="errlogin" style="display:none">Tel&eacute;fono o clave incorrectos</div>
@@ -25,7 +25,7 @@
         <input type="button" id="btlogin" class="login submit" value="Acceder">
         <ul class="enlaces">
           <li><a href="http://moviltr.com.ar/" target="_blank">Obtener una clave</a></li>
-          <li><a href="#">Obtener informaci&oacute;n</a></li>
+          <li><a href="http://moviltr.com.ar/" target="_blank">Obtener informaci&oacute;n</a></li>
         </ul>
       </p>
     </div>
@@ -58,19 +58,29 @@
     <script>
     (function(){
       $('#btlogin').click(function(){
+        if ($('#username').val().trim() == '' || $('#password').val().trim() == '')
+        {
+          $('#errlogin').fadeIn('fast');
+          return;
+        }
+
         $('#deshabilitar').fadeIn(500, function(){
           $.ajax({
-            url: "/user/login",
-            type: "POST",
+            url: "https://localhost:8080/user/login",
+            type: "GET",
             dataType: "json",
             success:function()
             {
               $('#deshabilitar').fadeOut('fast', function()
               {
                 $.ajax({
-                  url: "/parking",
+                  url: "https://localhost:8080/parking",
                   type: "GET",
                   dataType: "json",
+                  data:{
+                    'user':$('#username').val(),
+                    'password':$('#password').val()
+                  },
                   success:function(respuesta)
                   {
                     if (typeof respuesta.current_parking != 'undefined')
@@ -89,6 +99,10 @@
                         $('#main, #nuevo').fadeIn('fast');
                       })
                     }
+                  },
+                  error:function(xhr, optiones, thrownerr)
+                  {
+                    // Ocurrio un error
                   }
                 });
               });
@@ -101,6 +115,10 @@
                 $('#deshabilitar').fadeOut('fast', function(){
                   $('#errlogin').fadeIn('fast');
                 })
+              }
+              else
+              {
+                  // Ocurrio otro error
               }
             }
           });

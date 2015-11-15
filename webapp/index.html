@@ -57,10 +57,11 @@
     </div>
     <script>
     (function(){
+      // Boton de login
       $('#btlogin').click(function(){
         if ($('#username').val().trim() == '' || $('#password').val().trim() == '')
         {
-          $('#errlogin').fadeIn('fast');
+          $('#errlogin').fadeIn('fast').delay(5000).fadeOut('slow');
           return;
         }
 
@@ -124,6 +125,8 @@
           });
         });
       });
+
+      // Pagar estacionamiento
     })();
     </script>
   </body>

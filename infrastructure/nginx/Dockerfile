@@ -10,13 +10,11 @@ RUN \
         && apt-get -f -y dist-upgrade \
         && apt-get -f -y upgrade \
         && apt-get install -y nginx-naxsi-ui \
-        && sed -i '1i\daemon off;' /etc/nginx/nginx.conf \
-        && sed -i 's|#.*server_tokens off|server_tokens off|' /etc/nginx/nginx.conf \
-        && sed -i 's|#.*include /etc/nginx/naxsi_core.rules|include /etc/nginx/naxsi_core.rules|' /etc/nginx/nginx.conf \
-        && sed -i 's|access_log /var/log/nginx/access.log|access_log off|' /etc/nginx/nginx.conf \
-        && sed -i 's|error_log /var/log/nginx/error.log|error_log /dev/null|' /etc/nginx/nginx.conf
+	&& sed -i '1i\daemon off;' /etc/nginx/nginx.conf \
+	&& sed -i 's|#.*server_tokens off|server_tokens off|' /etc/nginx/nginx.conf \
+	&& sed -i 's|#.*include /etc/nginx/naxsi_core.rules|include /etc/nginx/naxsi_core.rules|' /etc/nginx/nginx.conf 
 
-ADD . /etc/nginx
+COPY . /etc/
 
 # Cleanup
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -25,6 +23,9 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 EXPOSE 80
 EXPOSE 443
 
+# Logs
+VOLUME [ "/var/log/nginx" ]
+
 CMD \
-        /etc/init.d/nginx-naxsi-ui start \
-        && nginx
+	/etc/init.d/nginx-naxsi-ui start \
+	&& nginx

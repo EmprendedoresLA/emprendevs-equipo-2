@@ -11,6 +11,12 @@ body
   font-size: 16px;
 }
 
+#applogo
+{
+  height:90px;
+  margin-top:10px
+}
+
 #deshabilitar
 {
   background: rgba(90,90,90,.6);

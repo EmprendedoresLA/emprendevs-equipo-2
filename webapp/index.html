@@ -1,15 +1,15 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <script src="https://localhost:8080/jquery-1.11.3.min.js"></script>
-    <link rel="stylesheet" media="all" href="https://localhost:8080/global.css">
+    <script src="jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" media="all" href="global.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta charset="utf-8">
     <title>Easyparking</title>
   </head>
   <body>
     <div id="deshabilitar" style="display:none">
-      <div><img src="https://localhost:8080/loading.gif" alt="" title="Cargando..."> Cargando...</div>
+      <div><img src="loading.gif" alt="" title="Cargando..."> Cargando...</div>
     </div>
     <div class="form login index" id="login">
       <div class="mensaje error" id="errlogin" style="display:none">Tel&eacute;fono o clave incorrectos</div>
@@ -31,10 +31,11 @@
     </div>
     <div class="index parking" id="main">
       <div id="nuevo" class="form" style="display:none">
+        <div class="mensaje error" id="payerr" style="display:none">Datos inv&aacute;lidos</div>
         <p>
           <label for="direccion">Direcci&oacute;n</label>
-          <input type="text" name="calle" placeholder="Calle">
-          <input type="text" name="numero" placeholder="0000" style="margin-top:5px">
+          <input type="text" name="calle" id="calle" placeholder="Calle">
+          <input type="text" name="numero" id="numero" placeholder="0000" style="margin-top:5px">
         </p>
         <p class="completar">
           <input type="button" id="btpagar" value="Pagar">
@@ -70,6 +71,10 @@
             url: "https://localhost:8080/user/login",
             type: "GET",
             dataType: "json",
+            data:{
+              'user':$('#username').val(),
+              'password':$('#password').val()
+            },
             success:function()
             {
               $('#deshabilitar').fadeOut('fast', function()
@@ -78,10 +83,6 @@
                   url: "https://localhost:8080/parking",
                   type: "GET",
                   dataType: "json",
-                  data:{
-                    'user':$('#username').val(),
-                    'password':$('#password').val()
-                  },
                   success:function(respuesta)
                   {
                     if (typeof respuesta.current_parking != 'undefined')
@@ -115,7 +116,7 @@
                 // Datos incorrectos
                 $('#deshabilitar').fadeOut('fast', function(){
                   $('#errlogin').fadeIn('fast');
-                })
+                });
               }
               else
               {
@@ -127,6 +128,12 @@
       });
 
       // Pagar estacionamiento
+      $('#btpagar').click(function(){
+        if ($('#calle').val().trim() == '' || $('#numero').val().trim() == '')
+        {
+          // ...
+        }
+      })
     })();
     </script>
   </body>

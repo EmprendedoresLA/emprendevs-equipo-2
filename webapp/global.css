@@ -64,7 +64,6 @@ body
   margin:10px auto;
   padding: 15px;
 }
-
 .form p
 {
   margin:3px 0px 10px 0px
@@ -84,7 +83,7 @@ label
   color: #36c;
 }
 
-input[type=text], input[type=password], input[type=button]
+input[type=text], input[type=password], input[type=button], input[type=number]
 {
   padding:5px;
   color:#333;

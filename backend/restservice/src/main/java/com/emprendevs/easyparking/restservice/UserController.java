@@ -1,6 +1,7 @@
 package com.emprendevs.easyparking.restservice;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,7 +23,8 @@ public class UserController {
 	
 	@RequestMapping("/user/login")
 	public void login(@RequestParam(value="username") String username,
-    		@RequestParam(value="password") String password) throws BadLoginException {
+    		@RequestParam(value="password") String password,
+    		HttpServletResponse response) throws BadLoginException {
 		
 		User userAgain = userRepo.findByUsernameAndPassword(username, password);
 		
@@ -30,6 +32,10 @@ public class UserController {
 	    	BadLoginException badLogin = new BadLoginException();
 		    throw badLogin;
 	    }
+	    
+	    UUID sessionid = UUID.randomUUID();
+	    
+	    response.setHeader("Set-Cookie", sessionid.toString());  
 	}
 	
 	@ExceptionHandler(BadLoginException.class)

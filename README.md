@@ -18,15 +18,13 @@ Requerimientos funcionales:
 www.moviltr.com.ar. El acceso a la aplicación se realizara utilizando el usuario y 
 contraseña de moviltr.com.ar
 
-2. Si el login es exitoso el usuario verá cierta información de su cuenta como el saldo.
+2. Si el login es exitoso el usuario verá cierta información de su cuenta como, por ejemplo, el saldo.
 
 3. Para inciar el estacionamiento el usuario debe proporcionar:
-a. Lugar de estacionamiento. La aplicación sugerirá la ubicación detectada 
+ 1. Lugar de estacionamiento. La aplicación sugerirá la ubicación detectada 
 utilizando el gps del dispositivo (en caso de que el dispositivo tenga gps).
-b. Tiempo de duración del estacionamiento o indicar si el estacionamiento es por 
+ 2. Tiempo de duración del estacionamiento o indicar si el estacionamiento es por 
 tiempo indefinido.
-
-Si
 
 4. Una vez iniciado el estacionamiento la aplicación realiza los pagos necesarios vía 
 www.moviltr.com.ar. Los pagos se realizan o hasta que caduque el tiempo seleccionado 
